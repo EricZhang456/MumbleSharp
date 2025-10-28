@@ -40,7 +40,9 @@ namespace MumbleSharp.Audio.Codecs.Opus
             IntPtr image;
             if (PlatformDetails.IsMac)
             {
-                image = LibraryLoader.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio", "Codecs", "Opus", "Libs", "32bit", "libopus.dylib"));
+                image = LibraryLoader.Load("libopus.dylib");
+                if (image.Equals(IntPtr.Zero))
+                    image = LibraryLoader.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio", "Codecs", "Opus", "Libs", "libopus.dylib"));
             }
             else if (PlatformDetails.IsWindows)
             {
